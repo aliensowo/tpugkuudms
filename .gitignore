@@ -1,2 +1,6 @@
 venv/
 .idea/
+gui/__pycache__/
+models/__pycache__/
+models/crud/__pycache__/
+models/schemas_directory/__pycache__/
