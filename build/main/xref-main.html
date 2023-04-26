@@ -153,15 +153,12 @@ imports:
  &#8226;   <a href="#fnmatch">fnmatch</a>
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#genericpath">genericpath</a>
- &#8226;   <a href="#gui.A_auth_page">gui.A_auth_page</a>
- &#8226;   <a href="#gui.B_main_page">gui.B_main_page</a>
  &#8226;   <a href="#heapq">heapq</a>
  &#8226;   <a href="#io">io</a>
  &#8226;   <a href="#keyword">keyword</a>
  &#8226;   <a href="#linecache">linecache</a>
  &#8226;   <a href="#locale">locale</a>
- &#8226;   <a href="#models.crud">models.crud</a>
- &#8226;   <a href="#models.crud.custom_users">models.crud.custom_users</a>
+ &#8226;   <a href="#logic">logic</a>
  &#8226;   <a href="#models.database">models.database</a>
  &#8226;   <a href="#models.models">models.models</a>
  &#8226;   <a href="#ntpath">ntpath</a>
@@ -303,7 +300,7 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>'org.python'</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#pickle">pickle</a>
+    <a href="#copy">copy</a>
  &#8226;   <a href="#xml.sax">xml.sax</a>
 
   </div>
@@ -354,6 +351,8 @@ imported by:
  &#8226;   <a href="#PyQt5.sip">PyQt5.sip</a>
  &#8226;   <a href="#gui.A_auth_page">gui.A_auth_page</a>
  &#8226;   <a href="#gui.B_main_page">gui.B_main_page</a>
+ &#8226;   <a href="#logic.A_logic_page">logic.A_logic_page</a>
+ &#8226;   <a href="#logic.B_logic_page">logic.B_logic_page</a>
  &#8226;   <a href="#main.py">main.py</a>
 
   </div>
@@ -412,6 +411,8 @@ imported by:
     <a href="#PyQt5">PyQt5</a>
  &#8226;   <a href="#gui.A_auth_page">gui.A_auth_page</a>
  &#8226;   <a href="#gui.B_main_page">gui.B_main_page</a>
+ &#8226;   <a href="#logic.A_logic_page">logic.A_logic_page</a>
+ &#8226;   <a href="#logic.B_logic_page">logic.B_logic_page</a>
  &#8226;   <a href="#main.py">main.py</a>
 
   </div>
@@ -3093,8 +3094,8 @@ imported by:
   <a target="code" href="///C:/Users/natsu/AppData/Local/Programs/Python/Python310/lib/copy.py" type="text/plain"><tt>copy</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#copyreg">copyreg</a>
- &#8226;   <a href="#org">org</a>
+    <a href="#'org.python'">'org.python'</a>
+ &#8226;   <a href="#copyreg">copyreg</a>
  &#8226;   <a href="#types">types</a>
  &#8226;   <a href="#weakref">weakref</a>
 
@@ -6702,7 +6703,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
+    <a href="#logic.A_logic_page">logic.A_logic_page</a>
 
   </div>
 
@@ -6722,7 +6723,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
+    <a href="#logic.B_logic_page">logic.B_logic_page</a>
 
   </div>
 
@@ -7652,6 +7653,66 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="logic"></a>
+  <a target="code" href="///C:/Users/natsu/PycharmProjects/tpugkuudms/logic/__init__.py" type="text/plain"><tt>logic</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#logic.A_logic_page">logic.A_logic_page</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#logic.A_logic_page">logic.A_logic_page</a>
+ &#8226;   <a href="#logic.B_logic_page">logic.B_logic_page</a>
+ &#8226;   <a href="#main.py">main.py</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="logic.A_logic_page"></a>
+  <a target="code" href="///C:/Users/natsu/PycharmProjects/tpugkuudms/logic/A_logic_page.py" type="text/plain"><tt>logic.A_logic_page</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PyQt5">PyQt5</a>
+ &#8226;   <a href="#PyQt5.QtWidgets">PyQt5.QtWidgets</a>
+ &#8226;   <a href="#gui.A_auth_page">gui.A_auth_page</a>
+ &#8226;   <a href="#logic">logic</a>
+ &#8226;   <a href="#logic.B_logic_page">logic.B_logic_page</a>
+ &#8226;   <a href="#models.crud">models.crud</a>
+ &#8226;   <a href="#models.crud.custom_users">models.crud.custom_users</a>
+ &#8226;   <a href="#models.database">models.database</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#logic">logic</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="logic.B_logic_page"></a>
+  <a target="code" href="///C:/Users/natsu/PycharmProjects/tpugkuudms/logic/B_logic_page.py" type="text/plain"><tt>logic.B_logic_page</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PyQt5">PyQt5</a>
+ &#8226;   <a href="#PyQt5.QtWidgets">PyQt5.QtWidgets</a>
+ &#8226;   <a href="#gui.B_main_page">gui.B_main_page</a>
+ &#8226;   <a href="#logic">logic</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#logic.A_logic_page">logic.A_logic_page</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="lzma"></a>
   <a target="code" href="///C:/Users/natsu/AppData/Local/Programs/Python/Python310/lib/lzma.py" type="text/plain"><tt>lzma</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -7767,7 +7828,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
+    <a href="#logic.A_logic_page">logic.A_logic_page</a>
  &#8226;   <a href="#models.crud.custom_users">models.crud.custom_users</a>
 
   </div>
@@ -7788,7 +7849,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
+    <a href="#logic.A_logic_page">logic.A_logic_page</a>
  &#8226;   <a href="#models.crud">models.crud</a>
 
   </div>
@@ -7808,7 +7869,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
+    <a href="#logic.A_logic_page">logic.A_logic_page</a>
+ &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#models.models">models.models</a>
 
   </div>
@@ -8939,7 +9001,7 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>org</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#copy">copy</a>
+    <a href="#pickle">pickle</a>
 
   </div>
 
@@ -9100,14 +9162,14 @@ imported by:
   <a target="code" href="///C:/Users/natsu/AppData/Local/Programs/Python/Python310/lib/pickle.py" type="text/plain"><tt>pickle</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#'org.python'">'org.python'</a>
- &#8226;   <a href="#_compat_pickle">_compat_pickle</a>
+    <a href="#_compat_pickle">_compat_pickle</a>
  &#8226;   <a href="#_pickle">_pickle</a>
  &#8226;   <a href="#codecs">codecs</a>
  &#8226;   <a href="#copyreg">copyreg</a>
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#io">io</a>
  &#8226;   <a href="#itertools">itertools</a>
+ &#8226;   <a href="#org">org</a>
  &#8226;   <a href="#pprint">pprint</a>
  &#8226;   <a href="#re">re</a>
  &#8226;   <a href="#struct">struct</a>
