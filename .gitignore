@@ -8,4 +8,4 @@ models/crud/__pycache__/
 models/schemas_directory/__pycache__/
 build/*
 dict/*
-gui/*.ui
+gui/*.py
