@@ -5,6 +5,12 @@ from models import models
 def get_list(db: Session):
     return db.query(models.Contractors).all()
 
+def get_by_name(db: Session, name: str):
+    return db.query(models.Contractors).filter(models.Contractors.contractor_name == name).first()
+
+def get_limit_offset(db: Session, limit: int =5, offset: int =0):
+    return db.query(models.Contractors).limit(limit).offset(offset)
+
 
 def create(
         db: Session,

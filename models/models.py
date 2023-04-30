@@ -127,6 +127,13 @@ class Compare(Base):
 
     id_compare = Column(Integer, primary_key=True)
     name = Column(String)
+
+
+class CompareWinners(Base):
+    __tablename__ = "CompareWinners"
+
+    id_compare_winner = Column(Integer, primary_key=True)
+    id_compare = Column(Integer, ForeignKey('Compare.id_compare', ondelete='CASCADE'))
     id_contractor = Column(Integer, ForeignKey('Contractors.id_contractor', ondelete='CASCADE'))
 
 

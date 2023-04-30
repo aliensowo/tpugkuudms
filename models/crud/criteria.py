@@ -1,10 +1,12 @@
 from sqlalchemy.orm import Session
-from models import models, schemas
+from models import models
 
 
 def get_criteria_list(db: Session):
     return db.query(models.Criteria).all()
 
+def get_by_name(db: Session, criteria_name: str):
+    return db.query(models.Criteria).filter(models.Criteria.criteria_name == criteria_name).first()
 
 def create_criteria(db: Session, criteria_name: str):
     db_item = models.Criteria(criteria_name=criteria_name)

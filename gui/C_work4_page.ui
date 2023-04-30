@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1184</width>
+    <height>572</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="widget_task_4" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1171</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <widget class="QTableWidget" name="tableWidget_task_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>1181</width>
+       <height>451</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_task_4">
+     <property name="geometry">
+      <rect>
+       <x>990</x>
+       <y>470</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Вперед</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_task_4">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>465</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>770</x>
+       <y>470</y>
+       <width>55</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ИС: </string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>770</x>
+       <y>490</y>
+       <width>55</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ОС: </string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1184</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
