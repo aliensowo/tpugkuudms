@@ -4,6 +4,9 @@ import hashlib
 class Auth:
 
     def __init__(self):
+        """
+        Deprecated
+        """
         ...
 
     def authorize(self, login: str, password: str):

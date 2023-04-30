@@ -25,12 +25,17 @@ class CLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
     task_4_temp_data = []
     init_int = 0
 
-    def __init__(self):
+    def __init__(self, compare_id: int, username: str):
         super(CLogicPage, self).__init__()
+        self.error_window = None
+        self.winner_window = None
         self.ui = CPage()
         self.ui.setupUi(self)
 
-        self.compare_id = 1
+        self.compare_id = compare_id
+        self.username = username
+        self.ui.label_3.setText("Пользователь {}\nСравнение: {}".format(self.username, self.compare_id))
+        self.ui.label_3.adjustSize()
         self.ui.label.setVisible(False)
         self.ui.label_2.setVisible(False)
         # prepare
@@ -44,13 +49,12 @@ class CLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
             self.task_4_pages.append(item["name"])
 
     def list_tabs_pagination_logic(self):
-        print("Click")
         table_name = self.ui.label_task_4.text()
         if table_name == "Сравнение критериев":
             self.compare_criteria_to_criteria_get_data_from_table()
             if self.calculate():
                 winner_obj = self.get_winner()
-                self.winner_window = ELogicPage(winner=winner_obj)
+                self.winner_window = ELogicPage(winner=winner_obj, compare_id=self.compare_id, username=self.username)
                 self.winner_window.show()
             else:
                 self.error_window = DLogicPage()
@@ -183,7 +187,7 @@ class CLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
                                 )
 
     def calculate_iis_oos(self, current_page_name: str):
-        if current_page_name == "TextLabel":
+        if current_page_name == "Начать":
             return
         sum_by_column = 0
         contractors_list_dict = self.get_data_contractors()
@@ -406,7 +410,6 @@ class CLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
         self.ui.label_2.setText(f"ОС: {oos}")
         self.ui.label_2.adjustSize()
         # TODO: если oos < 0.1 о ок, если нет то алерт на исправление
-        print(vector_2d)
         if oos < 0.1:
             return vector_2d
         else:
@@ -420,10 +423,10 @@ class CLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
         for criteria_element in criteria_id_name:
             criteria_name = criteria_element["name"]
             contractor_matrix = self.calculate_iis_oos(criteria_name)
-            sum = 0
+            summary = 0
             for i in range(len(contractor_matrix)):
-                sum += contractor_matrix[i][-1] * criteria_matrix[i][-1]
-            result_sum.append(sum)
+                summary += contractor_matrix[i][-1] * criteria_matrix[i][-1]
+            result_sum.append(summary)
         max_res = max(*result_sum)
         for ctc in ctc_list:
             if ctc["id_contractor"] == result_sum.index(max_res):

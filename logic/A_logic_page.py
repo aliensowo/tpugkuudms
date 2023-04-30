@@ -1,12 +1,14 @@
 from gui.A_auth_page import Ui_MainWindow
 from PyQt5 import QtWidgets
+
+from logic.D_logic_page import DLogicPage
+from logic._base_class_logic import BaseClassLogic
 from models.database import SessionLocal
 from models.crud import custom_users
 from logic.B_logic_page import BLogicPage
-from settings import DEBUG
 
 
-class ALogicPage(QtWidgets.QMainWindow):
+class ALogicPage(QtWidgets.QMainWindow, BaseClassLogic):
 
     def __init__(self):
         super(ALogicPage, self).__init__()
@@ -19,27 +21,22 @@ class ALogicPage(QtWidgets.QMainWindow):
         self.sender()
 
     def auth(self):
-        if DEBUG:
-            self.main_window = BLogicPage()
-            self.main_window.show()
-            self.close()
-        else:
-            password = self.ui.passwordInput.text()
-            username = self.ui.usernameInput.text()
-            with SessionLocal() as session:
-                if self.ui.checkBox.isChecked():
-                    print("Register")
-                    custom_users.create_user(session, username, password)
-                    self.ui.checkBox.setCheckState(False)
-                    self.ui.usernameInput.clear()
-                    self.ui.passwordInput.clear()
+        password = self.ui.passwordInput.text()
+        username = self.ui.usernameInput.text()
+        with SessionLocal() as session:
+            if self.ui.checkBox.isChecked():
+                custom_users.create_user(session, username, password)
+                self.ui.checkBox.setCheckState(False)
+                self.ui.usernameInput.clear()
+                self.ui.passwordInput.clear()
+            else:
+                user = custom_users.get_user(session, username, password)
+                if isinstance(user, custom_users.models.CustomUsers):
+                    compare_name = self.ui.lineEdit.text()
+                    compare_id = self.get_or_create_compare(compare_name=compare_name)
+                    self.main_window = BLogicPage(compare_id=compare_id, username=user.username)
+                    self.main_window.show()
+                    self.close()
                 else:
-                    user = custom_users.get_user(session, username, password)
-                    if isinstance(user, custom_users.models.CustomUsers):
-                        self.main_window = BLogicPage()
-                        self.main_window.show()
-                        self.close()
-
-                        print("Login")
-                    else:
-                        print("Error")
+                    self.error_window = DLogicPage("Неверный логин или пароль")
+                    self.error_window.show()

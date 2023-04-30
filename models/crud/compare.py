@@ -2,6 +2,11 @@ from sqlalchemy.orm import Session
 from models import models
 
 
+def get(db: Session, name: str):
+    return db.query(models.Compare).filter(
+        models.Compare.name == name
+    ).first()
+
 
 def create(
         db: Session,

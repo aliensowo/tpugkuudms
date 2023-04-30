@@ -1,8 +1,8 @@
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5 import QtWidgets
+
+from logic.D_logic_page import DLogicPage
 from models.database import SessionLocal
-from models.crud import criteria, contractors, contractors_to_contractors
+from models.crud import criteria, contractors
 from gui.B_main_page import Ui_MainWindow as BPage
 from logic.C_logic_page import CLogicPage
 from logic._base_class_logic import BaseClassLogic
@@ -12,11 +12,16 @@ from logic.table_model import MyTableModel
 
 class BLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
 
-    def __init__(self):
+    def __init__(self, compare_id: int, username: str):
         super(BLogicPage, self).__init__()
+        self.error_window = None
+        self.main_window = None
         self.ui = BPage()
         self.ui.setupUi(self)
-
+        self.compare_id = compare_id
+        self.username = username
+        self.ui.label_2.setText("Пользователь {}\nСравнение: {}".format(self.username, self.compare_id))
+        self.ui.label_2.adjustSize()
         self.ui.widget_db.setVisible(False)
         # Widget logic
         self.ui.pushButton_4.clicked.connect(self.display_task_4_widget)
@@ -28,11 +33,11 @@ class BLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
     def display_task_4_widget(self):
         # TODO: нужно проверять на наличие критериев и подрядчиков
         try:
-            self.main_window = CLogicPage()
+            self.main_window = CLogicPage(compare_id=self.compare_id, username=self.username)
             self.main_window.show()
-        except Exception as e:
-            print(e)
-            # show alert
+        except Exception as _:
+            self.error_window = DLogicPage("В базе нет критериев или подрядчиков")
+            self.error_window.show()
 
     def display_db_widget(self):
         self.ui.widget_db.setVisible(not self.ui.widget_db.isVisible())
@@ -43,16 +48,16 @@ class BLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
                 struct_to_list = []
                 for elem_criteria in criteria_data_list:
                     struct_to_list.append([elem_criteria["id"], elem_criteria["name"]])
-                model_criteria = MyTableModel(self, data=criteria_data_list, header=[
+                model_criteria = MyTableModel(self, data=struct_to_list, header=[
                     "id", "Критерий"
                 ], vertHeader=None)
                 self.ui.tableView.setModel(model_criteria)
             # Contractors set
             contractors_data_list = self.get_data_contractors()
             contr_elem_list = []
-            for contr_elem in contractors_data_list:
-                contr_elem_list.append(list(contr_elem.values()))
             if contractors_data_list:
+                for contr_elem in contractors_data_list:
+                    contr_elem_list.append(list(contr_elem.values()))
                 model_contractors = MyTableModel(self, data=contr_elem_list, header=[
                     "id", "Наименование подрядчика", "Стоимость работ", "Наличие технологий",
                     "Тех. оснащенность", "Наличие произвенных мощностей",

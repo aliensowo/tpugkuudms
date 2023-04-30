@@ -1,8 +1,19 @@
 from models.database import SessionLocal
-from models.crud import criteria, contractors, contractors_to_contractors
+from models.crud import criteria, contractors, compare
 from typing import List, Dict
 
+
 class BaseClassLogic:
+
+    @staticmethod
+    def get_or_create_compare(compare_name: str) -> int:
+        with SessionLocal() as session:
+            exist = compare.get(session, compare_name)
+            if exist:
+                return int(exist.id_compare)
+            else:
+                exist = compare.create(session, compare_name)
+                return int(exist.id_compare)
 
     @staticmethod
     def get_contractors_query():

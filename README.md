@@ -1,3 +1,10 @@
+# DB
+    
+    the local development uses sqlite as a database 
+    to use the program in the settings.py file, change the SQLALCHEMY_DATABASE_URL parameter
+    The database for local development is stored in the file sqlite.db 
+    The database schema is set up and restored automatically    
+
 # First steps
 
     git clone https://github.com/aliensowo/tpugkuudms.git
@@ -18,3 +25,7 @@
 # Make build
 
     pyinstaller --onefile -w .\main.py
+
+# Fast auto Restore DB 
+
+    python restore_db_data.py

@@ -68,7 +68,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -275,8 +275,22 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>960</x>
+      <y>10</y>
+      <width>55</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
    <zorder>widget_db</zorder>
    <zorder>gridLayoutWidget</zorder>
+   <zorder>label_2</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
