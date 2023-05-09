@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'gui/C_work4_page.ui'
+# Form implementation generated from reading ui file 'gui/C_work1_page.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
         self.tableWidget_task_4.setColumnCount(0)
         self.tableWidget_task_4.setRowCount(0)
         self.pushButton_task_4 = QtWidgets.QPushButton(self.widget_task_4)
-        self.pushButton_task_4.setGeometry(QtCore.QRect(990, 470, 171, 31))
+        self.pushButton_task_4.setGeometry(QtCore.QRect(110, 470, 171, 31))
         self.pushButton_task_4.setObjectName("pushButton_task_4")
         self.label_task_4 = QtWidgets.QLabel(self.widget_task_4)
         self.label_task_4.setGeometry(QtCore.QRect(60, 465, 121, 31))

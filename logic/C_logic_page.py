@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QTableWidgetItem
 
-from gui.C_work4_page import Ui_MainWindow as CPage
+from gui.C_work1_page import Ui_MainWindow as CPage
 from models.database import SessionLocal
 from models.crud import criteria, contractors, contractors_to_contractors, criteria_to_criteria
 from logic._base_class_logic import BaseClassLogic

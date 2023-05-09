@@ -22,7 +22,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>521</width>
+      <width>951</width>
       <height>41</height>
      </rect>
     </property>
@@ -30,6 +30,47 @@
      <property name="sizeConstraint">
       <enum>QLayout::SetMinimumSize</enum>
      </property>
+     <item row="0" column="6">
+      <widget class="QPushButton" name="pushButton_9">
+       <property name="text">
+        <string>Решение задачи 4</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <widget class="QPushButton" name="pushButton_6">
+       <property name="text">
+        <string>Решение задачи 2</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="7">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="8">
+      <widget class="QPushButton" name="pushButton_7">
+       <property name="text">
+        <string>Справочник</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="text">
+        <string>Решение задачи 1</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="1">
       <widget class="QPushButton" name="pushButton_db">
        <property name="text">
@@ -37,12 +78,25 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="pushButton_4">
+     <item row="0" column="5">
+      <widget class="QPushButton" name="pushButton_8">
        <property name="text">
-        <string>Решение задачи 4</string>
+        <string>Решение задачи 3</string>
        </property>
       </widget>
+     </item>
+     <item row="0" column="2">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </widget>
@@ -80,11 +134,11 @@
          <x>10</x>
          <y>10</y>
          <width>1151</width>
-         <height>391</height>
+         <height>441</height>
         </rect>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="tab_3">
         <attribute name="title">
@@ -135,15 +189,49 @@
         <attribute name="title">
          <string>Список критериев</string>
         </attribute>
-        <widget class="QTableView" name="tableView">
+        <widget class="QTableWidget" name="tableWidget">
          <property name="geometry">
           <rect>
-           <x>10</x>
+           <x>0</x>
            <y>0</y>
-           <width>1131</width>
-           <height>351</height>
+           <width>1141</width>
+           <height>411</height>
           </rect>
          </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_6">
+        <attribute name="title">
+         <string>Удалить критерий</string>
+        </attribute>
+        <widget class="QWidget" name="gridLayoutWidget_3">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>60</y>
+           <width>491</width>
+           <height>124</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Удалить критерий по id</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="pushButton_5">
+            <property name="text">
+             <string>Удалить</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEdit_9"/>
+          </item>
+         </layout>
         </widget>
        </widget>
       </widget>
@@ -157,12 +245,12 @@
         <rect>
          <x>10</x>
          <y>20</y>
-         <width>1051</width>
-         <height>391</height>
+         <width>1151</width>
+         <height>431</height>
         </rect>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="tab_7">
         <attribute name="title">
@@ -260,15 +348,49 @@
         <attribute name="title">
          <string>Список подрядчиков</string>
         </attribute>
-        <widget class="QTableView" name="tableView_3">
+        <widget class="QTableWidget" name="tableWidget_2">
          <property name="geometry">
           <rect>
-           <x>10</x>
+           <x>0</x>
            <y>0</y>
-           <width>1031</width>
-           <height>351</height>
+           <width>1141</width>
+           <height>401</height>
           </rect>
          </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_5">
+        <attribute name="title">
+         <string>Удалить подрядчика</string>
+        </attribute>
+        <widget class="QWidget" name="gridLayoutWidget_2">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>60</y>
+           <width>491</width>
+           <height>124</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Удалить подрядчика по id</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="text">
+             <string>Удалить</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEdit_3"/>
+          </item>
+         </layout>
         </widget>
        </widget>
       </widget>
