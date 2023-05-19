@@ -12,7 +12,7 @@ from logic.I_logic_page import ILogicPage
 from logic._base_class_logic import BaseClassLogic
 from models.crud import criteria, contractors
 
-from logic.table_model import MyTableModel
+
 
 
 class BLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
