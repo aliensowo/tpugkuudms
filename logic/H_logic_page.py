@@ -41,12 +41,6 @@ class HLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
                          "work_end",
                          "work_complete"],
             "crud": fact
-        },
-        4: {
-            "name": "Справочник кварталов",
-            "fields": ["Код Квартала", "Наименование квартала", "Дата начала квартала", "Дата окончания квартала"],
-            "fields_m": ["id_directory", "directory_name", "directory_start", "directory_end"],
-            "crud": neighborhood_directory,
         }
     }
 
@@ -207,54 +201,50 @@ class HLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
     def make_doc(self):
         itog = []
         with SessionLocal() as session:
-            m = objects_contracts.get(session, str(1))
-            cvartals = neighborhood_directory.list(session)
-            for cvartal in cvartals:
-                itog_row = {}
-                itog_row["Код квартала"] = cvartal["id_directory"]
-                itog_row[
-                    "Квартал"] = f"{cvartal['directory_name']} ({cvartal['directory_start']}, {cvartal['directory_end']})"
-                itog_row["Объект"] = m.object_name
+            m = objects_contracts.list(session)
+            for mo in m:
+                itog_row = {"Код объекта, подлежащего сдаче": mo["id_object"],
+                            "Наименование объекта": mo["object_name"]}
                 cv_plan = []
                 cv_fact = []
-                if self.check_range(m.date_start, m.date_end, cvartal["directory_start"], cvartal["directory_end"]):
-                    plan_list: List[plan.models.Plan] = plan.list(session)
-                    for p in plan_list:
-                        if self.check_range(p["work_start"], p["work_end"], cvartal["directory_start"],
-                                            cvartal["directory_end"]):
-                            cv_plan.append(p)
-                    fact_list: List[fact.models.Fact] = fact.list(session)
-                    for f in fact_list:
-                        if self.check_range(f["work_start"], f["work_end"], cvartal["directory_start"],
-                                            cvartal["directory_end"]):
-                            cv_fact.append(f)
-                itog_row["План объема"] = sum([int(x["volume"]) for x in cv_plan])
-                itog_row["Факт Объема"] = sum([int(x["volume"]) for x in cv_fact])
-                itog_row["План срока выполнения работ (дн)"] = sum([int(x["work_complete"]) for x in cv_plan])
-                itog_row["Факт срока"] = sum([int(x["work_complete"]) for x in cv_fact])
-                itog_row["Процент выполнения плана срока (%)"] = 100 / itog_row["План срока выполнения работ (дн)"] * \
-                                                                 itog_row["Факт срока"]
-                itog_row["Процент выполнения плана объема (%)"] = 100 / itog_row["План объема"] * itog_row[
-                    "Факт Объема"]
+
+                plan_list: List[plan.models.Plan] = plan.list(session)
+                for p in plan_list:
+                    if self.check_range(p["work_start"], p["work_end"], mo["date_start"], mo["date_end"]):
+                        cv_plan.append(p)
+                fact_list: List[fact.models.Fact] = fact.list(session)
+                for f in fact_list:
+                    if self.check_range(f["work_start"], f["work_end"], mo["date_start"], mo["date_end"]):
+                        cv_fact.append(f)
+                try:
+                    plan_sroc_percent = 100 / sum([int(x["work_complete"]) for x in cv_plan]) * sum(
+                        [int(x["work_complete"]) for x in cv_fact])
+                except ZeroDivisionError:
+                    plan_sroc_percent = 0
+                try:
+                    plan_volume_percent = 100 / sum([int(x["volume"]) for x in cv_plan]) * sum(
+                        [int(x["volume"]) for x in cv_fact])
+                except ZeroDivisionError:
+                    plan_volume_percent = 0
+                if plan_sroc_percent in range(95, 105) and plan_volume_percent in range(97, 103):
+                    itog_row["Заключение"] = "Подлежит для сдачи в текущем году"
+                else:
+                    itog_row["Заключение"] = "Не подлежит для сдачи в текущем году"
+                itog_row["Дата сдачи объекта"] = mo["date_end"]
                 itog.append(itog_row)
-        doc = docx.Document('raport2.docx')
+        doc = docx.Document('raport4.docx')
         for row_itog in itog:
             index = itog.index(row_itog) + 1
-            doc.tables[0].columns[0].cells[index].text = str(row_itog["Код квартала"])
-            doc.tables[0].columns[1].cells[index].text = str(row_itog["Квартал"])
-            doc.tables[0].columns[2].cells[index].text = str(row_itog["Объект"])
-            doc.tables[0].columns[3].cells[index].text = str(row_itog["План объема"])
-            doc.tables[0].columns[4].cells[index].text = str(row_itog["Факт Объема"])
-            doc.tables[0].columns[5].cells[index].text = str(row_itog["План срока выполнения работ (дн)"])
-            doc.tables[0].columns[6].cells[index].text = str(row_itog["Факт срока"])
-            doc.tables[0].columns[7].cells[index].text = str(row_itog["Процент выполнения плана срока (%)"])
-            doc.tables[0].columns[8].cells[index].text = str(row_itog["Процент выполнения плана объема (%)"])
+            doc.tables[0].columns[0].cells[index].text = str(row_itog["Код объекта, подлежащего сдаче"])
+            doc.tables[0].columns[1].cells[index].text = str(row_itog["Наименование объекта"])
+            doc.tables[0].columns[2].cells[index].text = str(row_itog["Заключение"])
+            doc.tables[0].columns[3].cells[index].text = str(row_itog["Дата сдачи объекта"])
         try:
             doc.save(
                 os.path.join(
                     os.path.join(os.getenv("USERPROFILE")),
                     "Desktop",
-                    f"report2_itog.docx"
+                    f"report4_itog.docx"
                 )
             )
         except Exception as e:
@@ -262,11 +252,10 @@ class HLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
                 os.path.join(
                     # os.path.join(os.getenv("USERPROFILE")),
                     # "Desktop",
-                    f"report2_itog.docx"
+                    f"report4_itog.docx"
                 )
             )
         self.close()
-
 
     @staticmethod
     def str_date_to_sec(string_date: str):
@@ -280,4 +269,3 @@ class HLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
             HLogicPage.str_date_to_sec(ts), HLogicPage.str_date_to_sec(te)
         ):
             return True
-
