@@ -57,7 +57,6 @@ class FLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
         }
     }
 
-    struct_temp = []
     objects_ids = []
 
     def __init__(self):
@@ -278,7 +277,6 @@ class FLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
         # for every objects get cvartals
         # for every work on object get plan and fact then sum and calc percent
 
-        # print(self.struct_temp)
 
     @staticmethod
     def str_date_to_sec(string_date: str):

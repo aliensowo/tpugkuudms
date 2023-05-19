@@ -1,16 +1,11 @@
 from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QTableWidgetItem
 
 from gui.I_guide_page import Ui_MainWindow as IPage
 from models.database import SessionLocal
-from models.crud import criteria, contractors, contractors_to_contractors, criteria_to_criteria, neighborhood_directory
+from models.crud import neighborhood_directory
 from models.crud import objects_contracts
 from logic._base_class_logic import BaseClassLogic
-from logic.D_logic_page import DLogicPage
-from logic.E_logic_page import ELogicPage
-from typing import List
-import math
 
 
 class ILogicPage(QtWidgets.QMainWindow, BaseClassLogic):
@@ -57,7 +52,6 @@ class ILogicPage(QtWidgets.QMainWindow, BaseClassLogic):
                         item.setFlags(item.flags() ^ QtCore.Qt.ItemFlag.ItemIsEditable)
                         item.setText(str(row[key]))
                         self.ui.tableWidget.setItem(d_list.index(row), list(row.keys()).index(key), item)
-
 
     def display_contracts(self):
         self.ui.tableWidget.clear()
