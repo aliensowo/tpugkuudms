@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Справочник</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="tableWidget">
@@ -31,26 +31,38 @@
      <x>0</x>
      <y>0</y>
      <width>1190</width>
-     <height>26</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>Критерии</string>
+     <string>Смотреть списки</string>
     </property>
-    <addaction name="action"/>
+    <addaction name="action_3"/>
+    <addaction name="action_4"/>
+    <addaction name="action_5"/>
    </widget>
    <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action">
+  <action name="action_2">
    <property name="text">
     <string>Смотреть список</string>
    </property>
   </action>
-  <action name="actionsdf">
+  <action name="action_3">
    <property name="text">
-    <string>sdf</string>
+    <string>Кварталы</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>Контракты</string>
+   </property>
+  </action>
+  <action name="action_5">
+   <property name="text">
+    <string>Критерии</string>
    </property>
   </action>
  </widget>
