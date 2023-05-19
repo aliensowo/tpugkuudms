@@ -2,6 +2,30 @@ from sqlalchemy import ForeignKey
 from sqlalchemy import Column, Integer, String
 from models.database import Base
 
+class Work(Base):
+    __tablename__ = "Work"
+    id_work = Column(Integer, primary_key=True)
+    work_name = Column(String)
+
+class Plan(Base):
+    __tablename__ = "Plan"
+    id = Column(Integer, primary_key=True)
+    id_work = Column(String)
+    work_name = Column(String)
+    volume = Column(String)
+    work_start = Column(String)
+    work_end =Column(String)
+    work_complete = Column(String)
+
+class Fact(Base):
+    __tablename__ = "Fact"
+    id = Column(Integer, primary_key=True)
+    id_work = Column(String)
+    work_name = Column(String)
+    volume = Column(String)
+    work_start = Column(String)
+    work_end =Column(String)
+    work_complete = Column(String)
 
 class ObjectsContracts(Base):
     __tablename__ = "ObjectsContracts"
