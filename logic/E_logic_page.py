@@ -21,7 +21,7 @@ class ELogicPage(QtWidgets.QMainWindow):
         self.ui.label_2.setText(self.winner["contractor_name"])
 
     def button_logic(self):
-        doc = docx.Document('raport.docx')
+        doc = docx.Document('raport1.docx')
         par_index = 0
         for paragraph in doc.paragraphs:
             style = paragraph.style
@@ -40,11 +40,20 @@ class ELogicPage(QtWidgets.QMainWindow):
             "\n", "").strip()
         doc.tables[0].columns[2].cells[5].text = self.winner["qualified_human_resources_personnel"].replace(
             "\n", "").strip()
-        doc.save(
-            os.path.join(os.path.join(
-                os.getenv("USERPROFILE")),
-                "Desktop",
-                f"report_{self.username}_{self.compare_id}.docx"
+        try:
+            doc.save(
+                os.path.join(os.path.join(
+                    os.getenv("USERPROFILE")),
+                    "Desktop",
+                    f"report1_{self.username}_{self.compare_id}.docx"
+                )
             )
-        )
+        except Exception as e:
+            doc.save(
+                os.path.join(
+                    # os.path.join(os.getenv("USERPROFILE")),
+                    # "Desktop",
+                    f"report1_{self.username}_{self.compare_id}.docx"
+                )
+            )
         self.close()
