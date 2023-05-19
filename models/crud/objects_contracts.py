@@ -1,3 +1,5 @@
+import time
+
 from sqlalchemy.orm import Session
 from models import models
 from typing import List, Dict
@@ -26,4 +28,14 @@ def list(db: Session):
         d = q.__dict__
         d.pop('_sa_instance_state', None)
         l.append(d)
+    return l
+
+def list_current_y(db: Session):
+    l = []
+    query = db.query(models.ObjectsContracts).all()
+    for q in query:
+        d = q.__dict__
+        d.pop('_sa_instance_state', None)
+        if d["date_end"].split(".")[-1] == f"{time.gmtime().tm_year}":
+            l.append(d)
     return l

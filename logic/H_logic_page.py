@@ -19,6 +19,7 @@ class HLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
             "fields": ["Номер объекта", "Наименование объекта", "Начало выполнения", "Конец выполнения"],
             "fields_m": ["id_object", "object_name", "date_start", "date_end"],
             "crud": objects_contracts,
+            "get_curr": objects_contracts.list_current_y
         },
         2: {
             "name": "Данные контрактов с подрядными организациями по плановым срокам выполнения работ",
@@ -80,6 +81,8 @@ class HLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
                         create(session, *data)
                     except sqlalchemy.exc.IntegrityError:
                         continue
+                    except sqlalchemy.exc.PendingRollbackError:
+                        continue
                     if struct["crud"] in [plan, fact]:
                         try:
                             work.create(session, *data[:2])
@@ -127,8 +130,12 @@ class HLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
         current = self.get_doc_struct()
         with SessionLocal() as session:
             try:
-                listq = current["crud"].__getattribute__("list")
-                query_array = listq(session)
+                if current["name"] == "Справочник контрактов с датами начала и конца выполнения объекта по предмету договора":
+                    listq = current["get_curr"]
+                    query_array = listq(session)
+                else:
+                    listq = current["crud"].__getattribute__("list")
+                    query_array = listq(session)
             except KeyError:
                 query_array = []
         if query_array.__len__() == 0:
@@ -201,7 +208,7 @@ class HLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
     def make_doc(self):
         itog = []
         with SessionLocal() as session:
-            m = objects_contracts.list(session)
+            m = objects_contracts.list_current_y(session)
             for mo in m:
                 itog_row = {"Код объекта, подлежащего сдаче": mo["id_object"],
                             "Наименование объекта": mo["object_name"]}
