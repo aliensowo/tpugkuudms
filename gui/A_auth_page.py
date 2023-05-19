@@ -75,7 +75,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addItem(spacerItem, 5, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1087, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1087, 24))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -88,8 +88,12 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_4.setText(_translate("MainWindow", "Сравнение:"))
+        self.label_4.setText(_translate("MainWindow", "Сравнение:\n"
+"Для задачи 1"))
+        self.usernameInput.setInputMask(_translate("MainWindow", "user"))
         self.label_2.setText(_translate("MainWindow", "Password:"))
+        self.passwordInput.setInputMask(_translate("MainWindow", "passwd"))
+        self.passwordInput.setText(_translate("MainWindow", "passw"))
         self.pushButton.setText(_translate("MainWindow", "Login"))
         self.label.setText(_translate("MainWindow", "Username:"))
         self.label_3.setText(_translate("MainWindow", "Welcome!"))
