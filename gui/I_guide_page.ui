@@ -41,6 +41,7 @@
     <addaction name="action_3"/>
     <addaction name="action_4"/>
     <addaction name="action_5"/>
+    <addaction name="action"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -63,6 +64,11 @@
   <action name="action_5">
    <property name="text">
     <string>Критерии</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>Объекты, сдача в текущем году</string>
    </property>
   </action>
  </widget>

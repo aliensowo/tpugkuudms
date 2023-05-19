@@ -40,9 +40,12 @@ class Ui_MainWindow(object):
         self.action_4.setObjectName("action_4")
         self.action_5 = QtWidgets.QAction(MainWindow)
         self.action_5.setObjectName("action_5")
+        self.action = QtWidgets.QAction(MainWindow)
+        self.action.setObjectName("action")
         self.menu.addAction(self.action_3)
         self.menu.addAction(self.action_4)
         self.menu.addAction(self.action_5)
+        self.menu.addAction(self.action)
         self.menubar.addAction(self.menu.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -56,3 +59,4 @@ class Ui_MainWindow(object):
         self.action_3.setText(_translate("MainWindow", "Кварталы"))
         self.action_4.setText(_translate("MainWindow", "Контракты"))
         self.action_5.setText(_translate("MainWindow", "Критерии"))
+        self.action.setText(_translate("MainWindow", "Объекты, сдача в текущем году"))

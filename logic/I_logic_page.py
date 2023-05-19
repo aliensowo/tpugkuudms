@@ -19,6 +19,7 @@ class ILogicPage(QtWidgets.QMainWindow, BaseClassLogic):
         self.ui.action_5.triggered.connect(self.display_criteria_list)
         self.ui.action_3.triggered.connect(self.display_directions)
         self.ui.action_4.triggered.connect(self.display_contracts)
+        self.ui.action.triggered.connect(self.display_objects_curr_y)
 
     def display_criteria_list(self):
         self.ui.tableWidget.clear()
@@ -57,6 +58,21 @@ class ILogicPage(QtWidgets.QMainWindow, BaseClassLogic):
         self.ui.tableWidget.clear()
         with SessionLocal() as session:
             d_list = objects_contracts.list(session)
+            if d_list:
+                self.ui.tableWidget.setColumnCount(d_list[0].__len__())
+                self.ui.tableWidget.setRowCount(d_list.__len__())
+                self.ui.tableWidget.setHorizontalHeaderLabels(list(d_list[0].keys()))
+                for row in d_list:
+                    for key in row.keys():
+                        item = QTableWidgetItem()
+                        item.setFlags(item.flags() ^ QtCore.Qt.ItemFlag.ItemIsEditable)
+                        item.setText(str(row[key]))
+                        self.ui.tableWidget.setItem(d_list.index(row), list(row.keys()).index(key), item)
+
+    def display_objects_curr_y(self):
+        self.ui.tableWidget.clear()
+        with SessionLocal() as session:
+            d_list = objects_contracts.list_current_y(session)
             if d_list:
                 self.ui.tableWidget.setColumnCount(d_list[0].__len__())
                 self.ui.tableWidget.setRowCount(d_list.__len__())
