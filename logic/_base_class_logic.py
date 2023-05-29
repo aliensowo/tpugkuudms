@@ -42,5 +42,9 @@ class BaseClassLogic:
         with SessionLocal() as session:
             criteria_list = criteria.get_criteria_list(session)
         for criteria_unit in criteria_list:
-            data.append({"id": criteria_unit.id_criteria, "name": criteria_unit.criteria_name})
+            data.append({
+                "id": criteria_unit.id_criteria,
+                "name": criteria_unit.criteria_name,
+                "code": criteria_unit.criteria_code
+            })
         return data

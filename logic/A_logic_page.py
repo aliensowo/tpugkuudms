@@ -24,17 +24,23 @@ class ALogicPage(QtWidgets.QMainWindow, BaseClassLogic):
         password = self.ui.passwordInput.text()
         username = self.ui.usernameInput.text()
         with SessionLocal() as session:
+            user = custom_users.get_user(session, username, password)
             if self.ui.checkBox.isChecked():
-                custom_users.create_user(session, username, password)
-                self.ui.checkBox.setCheckState(False)
-                self.ui.usernameInput.clear()
-                self.ui.passwordInput.clear()
+                try:
+                    if user is None:
+                        custom_users.create_user(session, username, password)
+                        self.ui.checkBox.setCheckState(False)
+                        self.ui.usernameInput.clear()
+                        self.ui.passwordInput.clear()
+                    else:
+                        self.error_window = DLogicPage("Данный пользователь уже зарегистрирован")
+                        self.error_window.show()
+                except Exception as _:
+                    self.error_window = DLogicPage("Произошла ошибка при регистрации")
+                    self.error_window.show()
             else:
-                user = custom_users.get_user(session, username, password)
                 if isinstance(user, custom_users.models.CustomUsers):
-                    compare_name = self.ui.lineEdit.text()
-                    compare_id = self.get_or_create_compare(compare_name=compare_name)
-                    self.main_window = BLogicPage(compare_id=compare_id, username=user.username)
+                    self.main_window = BLogicPage(username=user.username)
                     self.main_window.show()
                     self.close()
                 else:

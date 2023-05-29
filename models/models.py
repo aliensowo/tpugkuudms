@@ -174,6 +174,7 @@ class Criteria(Base):
 
     id_criteria = Column(Integer, primary_key=True)
     criteria_name = Column(String)
+    criteria_code = Column(String)
 
 
 class Contractors(Base):

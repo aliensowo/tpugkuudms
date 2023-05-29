@@ -14,8 +14,8 @@ def get_by_name(db: Session, criteria_name: str):
     return db.query(models.Criteria).filter(models.Criteria.criteria_name == criteria_name).first()
 
 
-def create_criteria(db: Session, criteria_name: str):
-    db_item = models.Criteria(criteria_name=criteria_name)
+def create(db: Session, criteria_name: str, criteria_code: str):
+    db_item = models.Criteria(criteria_name=criteria_name, criteria_code=criteria_code)
     db.add(db_item)
     db.commit()
     db.refresh(db_item)

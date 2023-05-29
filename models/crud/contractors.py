@@ -47,6 +47,6 @@ def create(
     return db_item
 
 
-def criteria_delete(db: Session, id_contractor: int):
+def delete(db: Session, id_contractor: int):
     db.query(models.Contractors).filter(models.Contractors.id_contractor == id_contractor).delete()
     db.commit()
