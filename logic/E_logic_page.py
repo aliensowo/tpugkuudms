@@ -1,3 +1,5 @@
+from PyQt5.QtWidgets import QTableWidgetItem
+
 from gui.E_winner_page import Ui_MainWindow as EPage
 from PyQt5 import QtWidgets
 import docx
@@ -14,11 +16,34 @@ class ELogicPage(QtWidgets.QMainWindow):
         self.compare_id = compare_id
         self.username = username
         # button logic
-        self.ui.buttonBox.accepted.connect(self.button_logic)
-        self.ui.buttonBox.rejected.connect(self.close)
+        self.ui.pushButton.clicked.connect(self.button_logic)
+        self.ui.pushButton_2.clicked.connect(self.close)
 
         # label logic
-        self.ui.label_2.setText(self.winner["contractor_name"])
+        self.ui.label_7.setText(self.winner["contractor_name"])
+        self.viewTable()
+
+    def viewTable(self):
+        # 0;1
+        item01 = QTableWidgetItem()
+        item01.setText(self.winner["work_cost"].replace("\n", "").strip())
+        self.ui.tableWidget.setItem(0, 1, item01)
+        # 1;1
+        item11 = QTableWidgetItem()
+        item11.setText(self.winner["availability_of_technology"].replace("\n", "").strip())
+        self.ui.tableWidget.setItem(1, 1, item11)
+        # 2;1
+        item21 = QTableWidgetItem()
+        item21.setText(self.winner["availability_of_technology"].replace("\n", "").strip())
+        self.ui.tableWidget.setItem(2, 1, item21)
+        # 3;1
+        item31 = QTableWidgetItem()
+        item31.setText(self.winner["availability_of_technology"].replace("\n", "").strip())
+        self.ui.tableWidget.setItem(3, 1, item31)
+        # 4;1
+        item41 = QTableWidgetItem()
+        item41.setText(self.winner["availability_of_technology"].replace("\n", "").strip())
+        self.ui.tableWidget.setItem(4, 1, item41)
 
     def button_logic(self):
         doc = docx.Document('raport1.docx')
@@ -28,6 +53,9 @@ class ELogicPage(QtWidgets.QMainWindow):
             if "{contractor_name}" in paragraph.text:
                 paragraph.text = paragraph.text.format(
                     contractor_name=self.winner["contractor_name"].replace("\n", "").strip())
+                doc.paragraphs[par_index].style = style
+            elif "«_»" in paragraph.text:
+                paragraph.text = paragraph.text = f"«{self.ui.dateEdit.date().day()}» {self.ui.dateEdit.date().month()} {self.ui.dateEdit.date().year()}г."
                 doc.paragraphs[par_index].style = style
             par_index += 1
         doc.tables[0].columns[2].cells[1].text = self.winner["work_cost"].replace(
