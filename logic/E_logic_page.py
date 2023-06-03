@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtWidgets import QTableWidgetItem, QFileDialog, QWidget
 
 from gui.E_winner_page import Ui_MainWindow as EPage
 from PyQt5 import QtWidgets
@@ -68,20 +68,23 @@ class ELogicPage(QtWidgets.QMainWindow):
             "\n", "").strip()
         doc.tables[0].columns[2].cells[5].text = self.winner["qualified_human_resources_personnel"].replace(
             "\n", "").strip()
-        try:
-            doc.save(
-                os.path.join(os.path.join(
-                    os.getenv("USERPROFILE")),
-                    "Desktop",
-                    f"report1_{self.username}_{self.compare_id}.docx"
-                )
-            )
-        except Exception as e:
+        result_file_name = self.saveFileDialog()
+        if result_file_name:
+            doc.save(result_file_name)
+        else:
             doc.save(
                 os.path.join(
-                    # os.path.join(os.getenv("USERPROFILE")),
-                    # "Desktop",
                     f"report1_{self.username}_{self.compare_id}.docx"
                 )
             )
+            self.close()
         self.close()
+
+    def saveFileDialog(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fileName, _ = QFileDialog.getSaveFileName(self, "QFileDialog.getSaveFileName()", "",
+                                                  "All Files (*);;Text Files (*.docx)", options=options)
+        if fileName:
+            return fileName
+        return None
