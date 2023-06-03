@@ -231,3 +231,11 @@ class CustomUsers(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String)
     password = Column(String)
+    role = Column(String, default="default")
+
+
+class Roles(Base):
+    __tablename__ = "Roles"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)

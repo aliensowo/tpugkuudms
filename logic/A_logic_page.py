@@ -36,13 +36,18 @@ class ALogicPage(QtWidgets.QMainWindow, BaseClassLogic):
                         self.error_window = DLogicPage("Данный пользователь уже зарегистрирован")
                         self.error_window.show()
                 except Exception as _:
+                    print(_)
                     self.error_window = DLogicPage("Произошла ошибка при регистрации")
                     self.error_window.show()
             else:
-                if isinstance(user, custom_users.models.CustomUsers):
-                    self.main_window = BLogicPage(username=user.username)
-                    self.main_window.show()
-                    self.close()
-                else:
-                    self.error_window = DLogicPage("Неверный логин или пароль")
+                if user.role == "default":
+                    self.error_window = DLogicPage("Ваша заявка на регистрацию на рассмотрении")
                     self.error_window.show()
+                else:
+                    if isinstance(user, custom_users.models.CustomUsers):
+                        self.main_window = BLogicPage(username=user.username)
+                        self.main_window.show()
+                        self.close()
+                    else:
+                        self.error_window = DLogicPage("Неверный логин или пароль")
+                        self.error_window.show()

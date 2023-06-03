@@ -9,6 +9,7 @@ from logic.F_logic_page import FLogicPage
 from logic.G_logic_page import GLogicPage
 from logic.H_logic_page import HLogicPage
 from logic.I_logic_page import ILogicPage
+from logic.J_logic_page_registr import JLogicPage
 from logic._base_class_logic import BaseClassLogic
 from models.crud import criteria, contractors
 
@@ -34,6 +35,11 @@ class BLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
         self.ui.pushButton.clicked.connect(self.button_help)
         self.ui.pushButton_2.clicked.connect(self.button_about)
         self.ui.pushButton_3.clicked.connect(self.button_exit)
+        self.ui.pushButton_8.clicked.connect(self.registration_list)
+
+    def registration_list(self):
+        self.main_window = JLogicPage()
+        self.main_window.show()
 
     def display_task_1_widget(self):
         self.main_window = CLogicPage(username=self.username)
