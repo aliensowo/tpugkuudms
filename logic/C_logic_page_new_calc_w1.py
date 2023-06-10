@@ -300,14 +300,18 @@ class CLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
     def cell_on_changed(self):
         cell = self.ui.tableWidget_task_4.currentItem()
         if cell is not None:
-            new_value = cell.text().replace(",", ".")
-            if not new_value.__contains__("."):
-                try:
-                    cell.setText(str(float(new_value)))
-                except ValueError:
-                    cell.setText(".ERR")
-                return
             if cell.column() > cell.row():
+                return
+            new_value = cell.text().replace(",", ".")
+            if not self.is_number(new_value):
+                self.error_window = DLogicPage("Введены недопустимые значения")
+                self.error_window.show()
+                cell.setText(".ERR")
+                return
+            try:
+                cell.setText(str(float(new_value)))
+            except ValueError:
+                cell.setText(".ERR")
                 return
             with SessionLocal() as s:
                 table_name = self.ui.label_task_4.text()
@@ -320,6 +324,7 @@ class CLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
                     )
                 if c is not None and c.value == new_value:
                     return
+            # for invert value
             try:
                 invert_value = str(1 / float(new_value))
             except ValueError:

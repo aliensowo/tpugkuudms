@@ -6,6 +6,19 @@ from typing import List, Dict
 class BaseClassLogic:
 
     @staticmethod
+    def is_number(str_number: str) -> bool:
+        if "." in str_number:
+            splitting = str_number.split(".")
+            if splitting[0].isnumeric() and splitting[1].isnumeric():
+                return True
+        elif "," in str_number:
+            splitting = str_number.split(",")
+            if splitting[0].isnumeric() and splitting[1].isnumeric():
+                return True
+        else:
+            return str_number.isnumeric()
+
+    @staticmethod
     def get_or_create_compare(compare_name: str) -> int:
         with SessionLocal() as session:
             exist = compare.get(session, compare_name)

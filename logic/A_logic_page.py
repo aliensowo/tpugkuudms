@@ -39,6 +39,9 @@ class ALogicPage(QtWidgets.QMainWindow, BaseClassLogic):
                     print(_)
                     self.error_window = DLogicPage("Произошла ошибка при регистрации")
                     self.error_window.show()
+            elif user is None:
+                self.error_window = DLogicPage("Пользователь не зарегистрирован")
+                self.error_window.show()
             else:
                 if user.role == "default":
                     self.error_window = DLogicPage("Ваша заявка на регистрацию на рассмотрении")

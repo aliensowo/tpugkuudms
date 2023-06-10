@@ -63,7 +63,7 @@ class CLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
     def click_button_create_criteria(self):
         criteria_name = self.ui.lineEdit.text()
         criteria_code = self.ui.lineEdit_2.text()
-        if criteria_name and criteria_code:
+        if criteria_name.isalnum() and criteria_code.isalnum():
             with SessionLocal() as session:
                 already_exis = criteria.get_by_name(session, criteria_name)
                 if already_exis is None:
@@ -73,6 +73,9 @@ class CLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
                     self.error_window.show()
                 self.ui.lineEdit.clear()
                 self.ui.lineEdit_2.clear()
+        else:
+            self.error_window = DLogicPage("Введены недопустимые значения")
+            self.error_window.show()
         self.create_or_update_tabs_table()
 
     def click_button_delete_criteria(self):
@@ -91,8 +94,8 @@ class CLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
         availability_of_production_facilities = self.ui.lineEdit_8.text()
         qualified_human_resources_personnel = self.ui.lineEdit_9.text()
         if all([
-            contractor_name, work_cost, availability_of_technology, tech_equipment,
-            availability_of_production_facilities, qualified_human_resources_personnel
+            contractor_name.isalnum(), self.is_number(work_cost), availability_of_technology.isalpha(), tech_equipment.isalpha(),
+            availability_of_production_facilities.isalpha(), qualified_human_resources_personnel.isalpha()
         ]):
             with SessionLocal() as session:
                 already_exist = contractors.get_by_name(session, contractor_name)
@@ -110,6 +113,9 @@ class CLogicPage(QtWidgets.QMainWindow, BaseClassLogic):
                 self.ui.lineEdit_7.clear()
                 self.ui.lineEdit_8.clear()
                 self.ui.lineEdit_9.clear()
+        else:
+            self.error_window = DLogicPage("Введены недопустимые значения")
+            self.error_window.show()
         self.create_or_update_tabs_table()
 
     def click_button_delete_contractor(self):
